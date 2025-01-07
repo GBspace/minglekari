@@ -67,7 +67,6 @@ export const signInAccount = async (user: {
 export const signOutAccount = async () => {
     try {
           const session = await account.deleteSession("current");          
-          console.log(session);
           return session;
         
         }

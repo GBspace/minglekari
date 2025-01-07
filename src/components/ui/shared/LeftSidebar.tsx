@@ -1,14 +1,19 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useUserContext } from "@/context/AuthContext";
 import { Button } from "../button";
 import { useSignoutAccount } from "@/lib/react-query/queriesAndMutations";
 import { sidebarLinks } from "@/constants";
 import { INavLink } from "@/types";
+import { useEffect } from "react";
 
 const LeftSidebar = () => {
   const { user } = useUserContext();
-  const { mutate: signOut } = useSignoutAccount();
+  const navigate = useNavigate();
+  const { mutate: signOut, isSuccess } = useSignoutAccount();
   const { pathname } = useLocation();
+  useEffect(() => {
+    if (isSuccess) navigate(0);
+  }, [isSuccess]);
   return (
     <nav className="leftsidebar">
       <div className="flex flex-col gap-11">
