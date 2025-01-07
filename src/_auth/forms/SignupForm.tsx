@@ -23,13 +23,18 @@ import * as z from "zod";
 
 const SignupForm = () => {
   const { toast } = useToast();
-  const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
+  const {
+    checkAuthUser,
+    // , isLoading: isUserLoading
+  } = useUserContext();
   const navigate = useNavigate();
   const { mutateAsync: createUserAccountInDB, isPending: isCreatingUser } =
     useCreateUserAccount();
 
-  const { mutateAsync: signInAccount, isPending: isSigningIn } =
-    useSignInAccount();
+  const {
+    mutateAsync: signInAccount,
+    // , isPending: isSigningIn
+  } = useSignInAccount();
   const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
     defaultValues: {
